@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./compose/production/nginx
+    ports:
+      - 80:80
+
+  web:
+    build:
+      context: .
+      dockerfile: ./compose/production/flask/Dockerfile
+    # '/start' is the shell script used to run the service
+    command: /start
+    env_file:
+      - .env/.prod

@@ -1,0 +1,213 @@
+{% extends 'index.html' %}
+{% block content %}
+{% set start_idx = 0 %}
+{% set end_idx = 0 %}
+{% set total_documents = 0 %}
+{% set total_pages = 0 %}
+
+
+{% if documents|length > 0 %}
+    {% set total_documents = documents|length %}
+    {% if total_documents == 3000 %}
+        {% set total_pages = 150 %}
+    {% elif total_documents > 20  %}
+        {% set total_pages = total_documents // 20 + 1 %}
+    {% else %}
+        {% set total_pages = 1 %}
+    {% endif %}
+    {% set start_idx = (page - 1) * 20 %}
+    {% if start_idx > total_documents %}
+        {% set start_idx = 0 %}
+    {% endif %}
+    {% if start_idx + 20 < total_documents %}
+        {% set end_idx = start_idx + 20 %}
+    {% else %}
+        {% set end_idx = total_documents %}
+    {% endif %}
+    {% set documents_slice = documents[start_idx:end_idx] %}
+{% endif %}
+
+
+<div class="container">
+    <div class="row" id="section-title">
+        <div class="col-md-11">
+            <p>Search results · all repositories</p>
+        </div>
+        <div class="col-md-1">
+            <div id="back-link">
+                <a id="icon-arrow-left" href="#" title="Back" onclick="window.history.back();">
+                    <span class="element-invisible">Back</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 filters rounded-start">
+            {% if query %}
+            <div class="row">
+                <h5 style="color: #00A6D6">Query</h5>
+                <ul class="ul-query">
+                    <li class="li-query">
+                        <a href="{{ url_for('index') }}" title="Remove {{ query }}">(-) {{ query }}</a>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if facet_search %}
+            <div class="row">
+                <h5 style="color: #00A6D6">Enabled Filters</h5>
+                <ul class="ul-query">
+                    {% for filter in facet_search %}
+                    <li class="li-query">
+                        <a href="{{ url_for('search', query=query, remove_facet_filter=filter[0], remove_facet_type=filter[1]) }}" title="Remove {{ filter[0] }}">(-) = {{ filter[0] }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if collections %}
+            <div class="row">
+                <h5>Collection</h5>
+                <ul class="ul-query list">
+                {% for collection in collections %}
+                    {% if loop.index > 10 %}
+                        <li class="li-search hidden-item hidden">
+                    {% else %}
+                         <li class="li-search">
+                    {% endif %}
+                         <a href="{{ url_for('search', query=query, facet_filter=collection, facet_type='collection') }}">{{ collection[0] }}</a>
+                        <span class="li-count">({{ collection[1] }})</span>
+                         </li>
+                    {% endfor %}
+                    {% if collections|length > 10 %}
+                        <li class="li-search-toggle">
+                            <a class="toggle-button">Show more</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if doctypes %}
+            <div class="row">
+                <h5>Document Type</h5>
+                <ul class="ul-query list">
+                    {% for doctype in doctypes %}
+                          {% if loop.index > 10 %}
+                            <li class="li-search hidden-item hidden">
+                          {% else %}
+                            <li class="li-search">
+                          {% endif %}
+                                <a href="{{ url_for('search', query=query, facet_filter=doctype, facet_type='doctype') }}">{{ doctype[0] }}</a>
+                                <span class="li-count">({{ doctype[1] }})</span>
+                            </li>
+                    {% endfor %}
+                    {% if doctypes|length > 10 %}
+                        <li class="li-search-toggle">
+                            <a class="toggle-button">Show more</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if subjects %}
+            <div class="row">
+                <h5>Subject</h5>
+                <ul class="ul-query list">
+                    {% for subject in subjects %}
+                        {% if loop.index > 10 %}
+                        <li class="li-search hidden-item hidden">
+                        {% else %}
+                        <li class="li-search">
+                        {% endif %}
+                            <a href="{{ url_for('search', query=query, facet_filter=subject[0], facet_type='subjects') }}">{{ subject[0] }} </a>
+                            <span class="li-count">({{ subject[1] }})</span>
+                        </li>
+                    {% endfor %}
+                    {% if subjects|length > 10 %}
+                        <li class="li-search-toggle">
+                            <a class="toggle-button">Show more</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if authors %}
+            <div class="row">
+                <h5>Author</h5>
+                <ul class="ul-query list">
+                    {% for author in authors %}
+                        {% if loop.index > 10 %}
+                        <li class="li-search hidden-item hidden">
+                        {% else %}
+                        <li class="li-search">
+                        {% endif %}
+                            <a href="{{ url_for('search', query=query, facet_filter=author[0], facet_type='authors') }}">{{ author[0] }} </a>
+                            <span class="li-count">({{ author[1] }})</span>
+                        </li>
+                    {% endfor %}
+                    {% if authors|length > 10 %}
+                        <li class="li-search-toggle">
+                            <a class="toggle-button">Show more</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <h5>Date</h5>
+                <div class="row">
+                    <div class="col-md-5">
+                      <div class="md-form">
+                        <input placeholder="Selected starting date" type="date" id="startingDate" class="form-control datepicker">
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="md-form">
+                        <input placeholder="Selected ending date" type="date" id="endingDate" class="form-control datepicker">
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 documents rounded-end">
+            {% with query=query, documents=documents, total_pages=total_pages, page=page %}
+            {% include 'search_navigation.html' %}
+            {% endwith %}
+
+            <div class="row document-results">
+                {% if documents %}
+                {% with query=query, documents=documents_slice, total_pages=total_pages, page=page %}
+                {% include 'search_document.html' %}
+                {% endwith %}
+
+                {% else %}
+                <div class="col-md-12">
+                    <h4>Enter a search query</h4>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Pagination at end of documents if there is a long list -->
+            {% if end_idx - start_idx >= 20 %}
+            {% with query=query, documents=documents, total_pages=total_pages, page=page %}
+            {% include 'search_navigation.html' %}
+            {% endwith %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- Clear localStorage variables on a new search -->
+{% if clear_local_storage %}
+<script>
+    localStorage.removeItem("selectedKeywords");
+    localStorage.removeItem("colorMapping");
+</script>
+{% endif %}
+
+{% endblock %}

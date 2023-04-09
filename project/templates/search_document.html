@@ -1,0 +1,43 @@
+{% for doc in documents %}
+    {% if loop.index % 2 == 1 %}
+        <dl style="background-color: #F1F2F2;">
+    {% else %}
+        <dl>
+    {% endif %}
+    <dt>
+        <i class="icon-document"></i>
+        <span class="doc-span">document</span>
+    </dt>
+    <dd>
+        <div class="row">
+            <div class="col-md-8">
+                <a href="{{ url_for('document', uuid=doc.uuid, query=query) }}" title="doc.title">{{ doc.title }}</a>
+                <br>
+                {% set authors = doc.authors.split(';') %}
+                {% for author in authors[:-1] %}
+                    {{ author }},&nbsp;
+                {% endfor %}
+                {{ authors[-1] if authors else '' }}
+                <br>
+                <div>
+                    {{ doc.abstract|truncate(250, True, ' ...') }}
+                </div>
+                <em> {{ doc.doctype }} {{ doc.date }}</em>
+            </div>
+            <div class="col-md-4">
+                {% set subjects = doc.subjects.split(';') %}
+                {% for subject in subjects %}
+                {% if subject %}
+                <div class="form-check">
+                    <input class="form-check-input rounded-circle keyword-checkbox" type="checkbox" value="{{ subject }}" id="subject-{{ loop.index }}">
+                    <label class="form-check-label" for="subject-{{ loop.index }}">
+                        {{ subject }}
+                    </label>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </dd>
+</dl>
+{% endfor %}

@@ -1,0 +1,87 @@
+{% extends 'index.html' %}
+
+{% block content %}
+   <div class="container">
+      <div class="row" id="section-title">
+          <div class="col-md-11">
+          </div>
+          <div class="col-md-1">
+              <div id="back-link">
+                <a id="icon-arrow-left" href="#" title="Back" onclick="window.history.back();">
+                    <span class="element-invisible">Back</span>
+                </a>
+            </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 filters rounded-start">
+
+        </div>
+        <div class="col-md-9 documents rounded-end">
+            <div class="row rounded">
+                <div class="col-md-10">
+                    {% set shorttitle = document.title.split(':') %}
+                    <h1>{{ shorttitle[0] }}</h1>
+                    <b>Title</b>
+                    <p>{{ document.title }}</p>
+
+                    <b>Author</b>
+                    <p>{{ document.authors }}</p>
+
+                    <b>Date</b>
+                    <p>{{ document.date }}</p>
+
+                    <b>Abstract</b>
+                    <p>{{ document.abstract }}</p>
+
+                    <b>Subject</b>
+                    <br>
+                    {% set subjects = document.subjects.split(';') %}
+                    {% for subject in subjects %}
+                        <a href="" style="padding: 0; color: #00A6D6">{{ subject }}</a>
+                        <br>
+                    {% endfor %}
+                    <br>
+                    <b>To reference this document use:</b>
+                    <p></p>
+
+                    <b>Publisher</b>
+                    <p>{{ document.publisher }}</p>
+
+                    <b>Series</b>
+                    <p>{{ document.series }}</p>
+
+                    <b>Part of collection</b>
+                    <p>{{ document.collection }}</p>
+
+                    <b>Document type</b>
+                    <p>{{ document.doctype }}</p>
+
+                    <b>Rights</b>
+                    <p>@ {{ document.date }} {{ document.authors }}</p>
+
+                    <b>Files</b>
+
+
+                </div>
+                <div class="col-md-2">
+                    <div class="row row-top-margin">
+                        <div class="col">
+                            <div class="dropdown">
+                              <i class="dropdown-toggle icon-lines" data-bs-toggle="dropdown" aria-expanded="false">test</i>
+                              <ul class="dropdown-menu">
+                                <li class="first-li"><a class="dropdown-item" href="#">Print</a></li>
+                                <li class="first-li"><a class="dropdown-item" href="#">Email</a></li>
+                                <li class="first-li"><a class="dropdown-item" href="#">export CSV</a></li>
+                                <li class="first-li"><a class="dropdown-item" href="#">export Excel</a></li>
+                              </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

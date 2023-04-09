@@ -1,0 +1,366 @@
+html {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial;
+  font-size: 13px;
+  line-height: 1.5em;
+  color: #000;
+  font-variant-numeric: tabular-nums;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #73AdA1;
+}
+
+header {
+  padding: 10px;
+  color: #FFF;
+}
+
+footer {
+  padding-top: 20px;
+  color: #FFF;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;  
+  background: 0 0;
+  color: inherit
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  margin: 1em 0;
+  list-style: none;
+  padding-left: 0;
+  text-align: center;
+}
+
+li {
+  background-size: 50px;
+  padding: 0;
+  list-style: none;
+  margin: 0 0 0 0.5em;
+  display: inline;
+}
+
+li::before {
+  content: " | ";
+}
+
+dl {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+  margin: 0
+}
+dt {
+  float: left;
+  width: 10%;
+  /* adjust the width; make sure the total of both is 100% */
+  padding: 0;
+  margin: 0
+}
+dd {
+  float: left;
+  width: 90%;
+  /* adjust the width; make sure the total of both is 100% */
+  padding: 0;
+  margin: 0
+}
+
+dd a {
+  color: #00A6D6;
+}
+
+h1 {
+  color: #00A6D6;
+  font-size: 39px;
+  line-height: 1em;
+  margin: 0 0 .5em;
+}
+
+input {
+  color: #FFF;
+}
+
+.logo-delft {
+  display: block;
+  width: 150px;
+  height: 65px;
+  background-size: 150px,65px;
+  background-image: url(images/logo_tudelft.png);
+  overflow: hidden;
+  text-indent: -99999em;
+}
+
+#search-text {
+  background-color: #73AdA1;
+  width: 80%;
+  vertical-align: middle;
+  font-size: 1.2em;
+  border-radius: 4px;
+  border: 1px solid #FFF;
+}
+
+#search-button {
+  padding: .25em 1em;
+  color: #FFF;
+  font-weight: 700;
+  font-size: 1em;
+  line-height: 1.5em;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #000;
+}
+
+#search-form {
+  margin-top: 3em;
+  height: 32px;
+  text-align: center;
+}
+
+#search-info {
+  display: inline-block; 
+  float: left; 
+  padding: 2px 2px 2px 18px;
+}
+
+#search-info2 {
+  display: inline-block; 
+  float: right; 
+  margin: 2px 92px 2px 2px;
+}
+
+#search-checkbox {
+  margin: -1px -1px 2px 2px; 
+  text-decoration: none; 
+}
+
+#icon-education, #icon-research, #icon-cultural {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-size: 50px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  text-indent: -99999em;
+
+}
+
+#icon-education:hover, #icon-research:hover, #icon-cultural:hover {
+  width: 55px;
+  height: 55px;
+  background-size: 55px;
+}
+
+#icon-research {
+  background-image: url(images/repo-research.png);
+}
+
+#icon-education {
+  background-image: url(images/repo-education.png);
+}
+
+#icon-cultural {
+  background-image: url(images/repo-cultural.png);
+}
+
+#section-title {
+  font-size: 1.5em;
+  line-height: 2em;
+  color: #FFF;
+  margin: 0 80px;
+}
+
+#back-link {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  position: relative;
+  top: 30px;
+  left: 150px;
+  border-radius: 20px;
+  background-color: #FFF;
+  color: #000;
+}
+
+#icon-arrow-left {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-size: 20px,20px;
+  background-image: url(images/arrow-left.svg);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  text-indent: -99999em;
+}
+
+#icon-arrow-left:hover {
+  opacity: 50%;
+}
+
+.filters {
+  background-color: #F1F2F2;
+  padding: 1.5em 20px 200px;
+}
+
+.ul-query {
+  text-align: left;
+}
+
+.li-query, .li-search, .li-search-toggle {
+  color: #00A6D6;
+  float: left;
+  width: 90%;
+}
+
+.li-query, .li-search-toggle, .li-count {
+  color: black;
+}
+
+.li-search:before, .li-search-toggle:before {
+  content: '';
+}
+
+.li-search:hover {
+  color: black;
+  cursor:pointer;
+}
+
+.li-query:before {
+   content: '●';
+}
+
+.li-query:hover {
+  color: #00A6D6;
+  cursor:pointer;
+}
+
+.datepicker {
+  width: 100px;
+}
+
+.documents {
+  background-color: #FFF;
+  padding: 1.5em 30px 200px;
+}
+
+.hidden {
+  display: none;
+}
+
+.sort {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  text-indent: -99999em;
+  border-radius: 4px;
+  border: 1px solid #00A6D6;
+}
+
+.sort {
+    background-image: url(images/sort-down.svg);
+}
+
+.first-li::before {
+  content: "";
+}
+
+.pagination {
+    padding: 10px .5em;
+    background-color: #D1D3D4;
+}
+
+.row-top-margin {
+  margin-top: 2em;
+}
+
+.row-bottom-margin {
+  margin-bottom:20px;
+  height: 5px;
+}
+
+.icon-list-view, .icon-grid-view, .icon-lines {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  text-indent: -99999em;
+  border-radius: 4px;
+  border: 1px solid #00A6D6;
+}
+
+.icon-list-view {
+  background-image: url(images/listview.png);
+}
+
+.icon-grid-view {
+  background-image: url(images/gridview.png);
+}
+
+.icon-lines {
+  background-image: url(images/options.png);
+}
+
+.document-results {
+  margin-top: 30px;
+}
+
+.icon-document {
+  display: block;
+  width: 30px;
+  height: 40px;
+  background-image: url(images/document.png);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  margin-left: 25%;
+  margin-top: 25%;
+}
+
+.doc-span {
+  font-size: .76923em;
+  margin-left: 20%;
+  margin-top: 25%;
+  color: #58595B;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+  background-color: #F1F2F2;
+  color: #00A6D6 !important;
+}
+
+.custom-checkbox {
+    border-radius: 50%;
+    appearance: none;
+    /* width: 20px;
+    height: 20px; */
+    background-color: #fff;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.custom-checkbox:checked {
+    background-color: transparent;
+    border: none;
+}
